@@ -2,10 +2,11 @@
     <head>
         <title>2048</title>
         <meta http-equiv='content-type' content='text/html;charset=gb2312' />
+        <meta charset="UTF-8" />
         <style type="text/css">
             body,div,ul,li,p{padding:0;margin:0;border-radius:10px;}
             body{
-                font-family:"Microsoft YaHei",Î¢ÈíÑÅºÚ,Arial,Simsun,sans-serif;
+                font-family:"Microsoft YaHei",å¾®è½¯é›…é»‘,Arial,Simsun,sans-serif;
                 background:#FFFCEC;
             }
             .game_box{
@@ -43,8 +44,8 @@
     <body onload="init();" onkeyup="run();">
         <div class="game_box">
             <div class="info">
-                <p style="float:right;">µÃ·Ö£º<span id="score">0</span></p>
-                ×î´óÖµ£º<span id="max_value">0</span>
+                <p style="float:right;">å¾—åˆ†ï¼š<span id="score">0</span></p>
+                æœ€å¤§å€¼ï¼š<span id="max_value">0</span>
             </div>
             <ul class="main_box">
                 <li id="11"></li>
@@ -65,10 +66,10 @@
                 <li id="44"></li>
             </ul>
             <div style="clear:both;"></div>
-            <p class="rule">Íæ·¨£º</p>
-            <p class="rule">1.ÓÃ¼üÅÌÉÏÏÂ×óÓÒ¼ü¿ØÖÆÊı×Ö×ßÏò</p>
-            <p class="rule">2.µ±µã»÷ÁËÒ»¸ö·½ÏòÊ±£¬¸ñ×ÓÖĞµÄÊı×Ö»áÈ«²¿ÍùÄÇ¸ö·½ÏòÒÆ¶¯£¬Ö±µ½²»ÄÜÔÙÒÆ¶¯£¬Èç¹ûÓĞÏàÍ¬µÄÊı×ÖÔò»áºÏ²¢</p>
-            <p class="rule">3.µ±¸ñ×ÓÖĞ²»ÔÙÓĞ¿ÉÒÆ¶¯ºÍ¿ÉºÏ²¢µÄÊı×ÖÊ±£¬ÓÎÏ·½áÊø</p>
+            <p class="rule">ç©æ³•ï¼š</p>
+            <p class="rule">1.ç”¨é”®ç›˜ä¸Šä¸‹å·¦å³é”®æ§åˆ¶æ•°å­—èµ°å‘</p>
+            <p class="rule">2.å½“ç‚¹å‡»äº†ä¸€ä¸ªæ–¹å‘æ—¶ï¼Œæ ¼å­ä¸­çš„æ•°å­—ä¼šå…¨éƒ¨å¾€é‚£ä¸ªæ–¹å‘ç§»åŠ¨ï¼Œç›´åˆ°ä¸èƒ½å†ç§»åŠ¨ï¼Œå¦‚æœæœ‰ç›¸åŒçš„æ•°å­—åˆ™ä¼šåˆå¹¶</p>
+            <p class="rule">3.å½“æ ¼å­ä¸­ä¸å†æœ‰å¯ç§»åŠ¨å’Œå¯åˆå¹¶çš„æ•°å­—æ—¶ï¼Œæ¸¸æˆç»“æŸ</p>
         </div>
     </body>
     <script type="text/javascript">
@@ -77,13 +78,13 @@
             21:0,22:0,23:0,24:0,
             31:0,32:0,33:0,34:0,
             41:0,42:0,43:0,44:0
-        };//Õû¸ö±í¸ñ
-        var cur_queue = null;//ÓÉÓÚÒÆ¶¯Ê±ÊÇÒ»ĞĞ»òÒ»ÁĞÒÆ¶¯µÄ£¬´Ë±äÁ¿´ú±íĞèÒª´¦ÀíµÄµ±Ç°ĞĞºÍÁĞ
-        var direction = 0;//µ±Ç°²Ù×÷ÒÆ¶¯µÄ·½Ïò
-        var max_value = 0;//×î´óÖµ
-        var score = 0;//×î¸ß·ÖÊı
+        };//æ•´ä¸ªè¡¨æ ¼
+        var cur_queue = null;//ç”±äºç§»åŠ¨æ—¶æ˜¯ä¸€è¡Œæˆ–ä¸€åˆ—ç§»åŠ¨çš„ï¼Œæ­¤å˜é‡ä»£è¡¨éœ€è¦å¤„ç†çš„å½“å‰è¡Œå’Œåˆ—
+        var direction = 0;//å½“å‰æ“ä½œç§»åŠ¨çš„æ–¹å‘
+        var max_value = 0;//æœ€å¤§å€¼
+        var score = 0;//æœ€é«˜åˆ†æ•°
          
-        function is_num_exist() {//ÅĞ¶Ïµ±Ç°´¦ÀíĞĞ£¨ÁĞ£©ÊÇ·ñÓĞÊı×Ö£¬ÓĞÔò½øĞĞ´¦Àí£¬ÎŞÔò²»ÓÃ´¦Àí
+        function is_num_exist() {//åˆ¤æ–­å½“å‰å¤„ç†è¡Œï¼ˆåˆ—ï¼‰æ˜¯å¦æœ‰æ•°å­—ï¼Œæœ‰åˆ™è¿›è¡Œå¤„ç†ï¼Œæ— åˆ™ä¸ç”¨å¤„ç†
             if(table[cur_queue[1]]+table[cur_queue[2]]+table[cur_queue[3]]+table[cur_queue[4]]>0) {
                 return true;
             }else {
@@ -91,7 +92,7 @@
             }
         }
  
-        function need_move() {//µ±Ç°ĞĞ£¨ÁĞ£©ÊÇ·ñĞèÒªÒÆ¶¯£¨²»°üÀ¨ºÏ²¢£©
+        function need_move() {//å½“å‰è¡Œï¼ˆåˆ—ï¼‰æ˜¯å¦éœ€è¦ç§»åŠ¨ï¼ˆä¸åŒ…æ‹¬åˆå¹¶ï¼‰
             if(Boolean(table[cur_queue[4]])>=Boolean(table[cur_queue[3]])&&Boolean(table[cur_queue[3]])>=Boolean(table[cur_queue[2]])&&Boolean(table[cur_queue[2]])>=Boolean(table[cur_queue[1]])) {
                 return false;
             }else {
@@ -99,7 +100,7 @@
             }
         }
          
-        function need_merge() {//µ±Ç°ĞĞ£¨ÁĞ£©ÊÇ·ñĞèÒªºÏ²¢
+        function need_merge() {//å½“å‰è¡Œï¼ˆåˆ—ï¼‰æ˜¯å¦éœ€è¦åˆå¹¶
             if((table[cur_queue[4]]==table[cur_queue[3]])&&table[cur_queue[4]]&&table[cur_queue[3]]||(table[cur_queue[3]]==table[cur_queue[2]])&&table[cur_queue[3]]&&table[cur_queue[2]]||(table[cur_queue[2]]==table[cur_queue[1]])&&table[cur_queue[2]]&&table[cur_queue[1]]) {
                 return true;
             }else {
@@ -107,7 +108,7 @@
             }
         }
          
-        function move() {//¶Ôµ±Ç°ĞĞ£¨ÁĞ£©µÄÊı×Ö½øĞĞÒÆ¶¯
+        function move() {//å¯¹å½“å‰è¡Œï¼ˆåˆ—ï¼‰çš„æ•°å­—è¿›è¡Œç§»åŠ¨
             for(var i=4;i>=2;i--) {
                 if(Boolean(table[cur_queue[i]]<Boolean(table[cur_queue[i-1]]))) {
                     table[cur_queue[i]] = table[cur_queue[i-1]];
@@ -117,33 +118,33 @@
             }
         }
  
-        function merge() {//¶Ôµ±Ç°ĞĞ£¨ÁĞ£©µÄÊı×Ö½øĞĞºÏ²¢
+        function merge() {//å¯¹å½“å‰è¡Œï¼ˆåˆ—ï¼‰çš„æ•°å­—è¿›è¡Œåˆå¹¶
             for(var i=4;i>=2;i--) {
                 if(table[cur_queue[i]]==table[cur_queue[i-1]]) {
                     score=score+table[cur_queue[i]];
                     table[cur_queue[i]] = table[cur_queue[i]]+table[cur_queue[i-1]];
                     table[cur_queue[i-1]] = 0;
-                    document.getElementById("score").innerHTML=score;//¸üĞÂ×î¸ß·Ö
+                    document.getElementById("score").innerHTML=score;//æ›´æ–°æœ€é«˜åˆ†
                     break;
                 }
             }
         }
  
-        function run() {//µã»÷ÉÏÏÂ×óÓÒ¼üÊ±¿ªÊ¼Ö´ĞĞ
+        function run() {//ç‚¹å‡»ä¸Šä¸‹å·¦å³é”®æ—¶å¼€å§‹æ‰§è¡Œ
             var done = false;
-            if(event.keyCode>=37&&event.keyCode<=40) {//Ö»ÓĞ
-                set_direction();//ÉèÖÃÒÆ¶¯·½Ïò²ÎÊı
-                for(var i=1;i<=4;i++) {//ÓÉÓÚÒ»¸ö·½ÏòÉÏÒÆ¶¯Ê±ÓĞ4ĞĞ£¨ÁĞ£©ËùÒÔĞèÒªÖğĞĞ´¦Àí
-                    set_cur_queue(i);//ÉèÖÃµ±Ç°ĞĞ£¨ÁĞ£©
+            if(event.keyCode>=37&&event.keyCode<=40) {//åªæœ‰
+                set_direction();//è®¾ç½®ç§»åŠ¨æ–¹å‘å‚æ•°
+                for(var i=1;i<=4;i++) {//ç”±äºä¸€ä¸ªæ–¹å‘ä¸Šç§»åŠ¨æ—¶æœ‰4è¡Œï¼ˆåˆ—ï¼‰æ‰€ä»¥éœ€è¦é€è¡Œå¤„ç†
+                    set_cur_queue(i);//è®¾ç½®å½“å‰è¡Œï¼ˆåˆ—ï¼‰
                     if(is_num_exist()) {
                         if(need_move()||need_merge()) {
-                            done = true;//´Ë±äÁ¿ÓÃÀ´ÏŞÖÆÃ¿´ÎÖ»ºÏ²¢Ò»´Î
+                            done = true;//æ­¤å˜é‡ç”¨æ¥é™åˆ¶æ¯æ¬¡åªåˆå¹¶ä¸€æ¬¡
                         }
-                        while(need_move()) {//Èç¹û¿ÉÒÔÒÆ¶¯ÔòÒ»Ö±ÒÆ¶¯
+                        while(need_move()) {//å¦‚æœå¯ä»¥ç§»åŠ¨åˆ™ä¸€ç›´ç§»åŠ¨
                             move();
                         }
-                        if(need_merge()) {//Èç¹ûĞèÒªºÏ²¢
-                            if(table[cur_queue[1]]==table[cur_queue[2]]&&table[cur_queue[3]]==table[cur_queue[4]]) {//ÌØÀı£¬µ±Ò»ĞĞ£¨ÁĞ£©ÉÏËÄ¸öÊı×ÖÈ«²¿ÏàÍ¬Ê±ºò£¬½øĞĞÁ½´ÎºÏ²¢
+                        if(need_merge()) {//å¦‚æœéœ€è¦åˆå¹¶
+                            if(table[cur_queue[1]]==table[cur_queue[2]]&&table[cur_queue[3]]==table[cur_queue[4]]) {//ç‰¹ä¾‹ï¼Œå½“ä¸€è¡Œï¼ˆåˆ—ï¼‰ä¸Šå››ä¸ªæ•°å­—å…¨éƒ¨ç›¸åŒæ—¶å€™ï¼Œè¿›è¡Œä¸¤æ¬¡åˆå¹¶
                                 merge();
                                 while(need_move()) {
                                     move();
@@ -158,16 +159,16 @@
                         }
                     }
                 }
-                //var empty_box = find_empty_box();//»ñÈ¡µ±Ç°¿Õ¸ñ×Ó¼¯ºÏ
-                //if(empty_box.length==0&&!need_merge()) {//Èç¹ûÃ»ÓĞÃ»ÓĞ¿ÕÎ»ÇÒ²»ÄÜºÏ²¢
+                //var empty_box = find_empty_box();//è·å–å½“å‰ç©ºæ ¼å­é›†åˆ
+                //if(empty_box.length==0&&!need_merge()) {//å¦‚æœæ²¡æœ‰æ²¡æœ‰ç©ºä½ä¸”ä¸èƒ½åˆå¹¶
                 //    alert('Game over');
                 //    return;
                 //}
-                if(done) {//Èç¹û´Ë´ÎÓĞÒÆ¶¯»òºÏ²¢£¬¼´ÓĞĞ§²Ù×÷£¬ÔòÉú³ÉĞÂµÄÊı×Ö
+                if(done) {//å¦‚æœæ­¤æ¬¡æœ‰ç§»åŠ¨æˆ–åˆå¹¶ï¼Œå³æœ‰æ•ˆæ“ä½œï¼Œåˆ™ç”Ÿæˆæ–°çš„æ•°å­—
                     create_and_set_num();
                 }
-                update_max_value();//¸üĞÂ×î´óÖµ
-                draw();//ÖØĞÂ»æÖÆ±í¸ñÓÃÓÚÏÔÊ¾
+                update_max_value();//æ›´æ–°æœ€å¤§å€¼
+                draw();//é‡æ–°ç»˜åˆ¶è¡¨æ ¼ç”¨äºæ˜¾ç¤º
             }
         }
  
@@ -195,7 +196,7 @@
             }
         }
  
-        function draw() {//ÕûÌåË¢ĞÂ16¸ö¸ñ×Ó
+        function draw() {//æ•´ä½“åˆ·æ–°16ä¸ªæ ¼å­
             for(var i=10;i<=40;i+=10) {
                 for(var j=1;j<=4;j++) {
                     if(table[i+j]!=0) {
@@ -207,11 +208,11 @@
             }
         }
  
-        function set_direction() {//ÉèÖÃ´Ë´ÎÒÆ¶¯µÄ·½Ïò
+        function set_direction() {//è®¾ç½®æ­¤æ¬¡ç§»åŠ¨çš„æ–¹å‘
             direction = event.keyCode;
         }
  
-        function set_new_num(empty_box) {//Éú³ÉĞÂµÄÊı×Ö
+        function set_new_num(empty_box) {//ç”Ÿæˆæ–°çš„æ•°å­—
             var num = 0;
             var ranNum = Math.random()*100;
             if(ranNum>80) {
@@ -223,7 +224,7 @@
             table[empty_box[box_num]] = num;
         }
  
-        function find_empty_box() {//»ñµÃËùÓĞµÄ¿Õ¸ñ×Ó£¬¼´ÖµÎª0µÄ¸ñ×Ó¼¯ºÏ
+        function find_empty_box() {//è·å¾—æ‰€æœ‰çš„ç©ºæ ¼å­ï¼Œå³å€¼ä¸º0çš„æ ¼å­é›†åˆ
             var empty_box = [];
             for(var num in table) {
                 if(table[num]==0) {
